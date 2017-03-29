@@ -63,7 +63,6 @@ func main() {
 	router := mux.NewRouter()
 	//one and only code
 	codes = append(codes, codeData{ID: "1", SecretCode: "Empty"})
-	codes = append(codes, codeData{ID: "2", SecretCode: "Empty2"})
 
 	router.HandleFunc("/slr", getSLR).Methods("GET")
 	router.HandleFunc("/slr/{id}", addSLR).Methods("POST")
