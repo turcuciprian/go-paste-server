@@ -10,7 +10,7 @@ import (
 
 type codeData struct {
 	ID         string `json:"id,omitempty"`
-	secretCode string `json:"secretCode,omitempty"`
+	SecretCode string `json:"SecretCode,omitempty"`
 }
 
 var codes []codeData
@@ -56,7 +56,7 @@ func delSLR(w http.ResponseWriter, req *http.Request) {
 func main() {
 	router := mux.NewRouter()
 	//one and only code
-	codes = append(codes, codeData{ID: "1", secretCode: "Empty"})
+	codes = append(codes, codeData{ID: "1", SecretCode: "Empty"})
 
 	router.HandleFunc("/secretLinkRoute", getSLR).Methods("GET")
 	router.HandleFunc("/slrAdd/{id}", addSLR).Methods("POST")
