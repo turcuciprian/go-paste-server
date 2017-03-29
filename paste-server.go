@@ -10,12 +10,14 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//Todo structure
 type Todo struct {
 	Name      string
 	Completed bool
 	Due       time.Time
 }
 
+// Todos structure array
 type Todos []Todo
 
 func main() {
@@ -28,12 +30,12 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
-//this does nothing much
+//Index this does nothing much
 func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Welcome!")
 }
 
-//todoindex  returns json
+//TodoIndex  returns json
 func TodoIndex(w http.ResponseWriter, r *http.Request) {
 	todos := Todos{
 		Todo{Name: "Write presentation"},
