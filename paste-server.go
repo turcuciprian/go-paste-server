@@ -38,7 +38,7 @@ func modSLR(w http.ResponseWriter, req *http.Request) {
 	var jsonResponse codeData
 	_ = json.NewDecoder(req.Body).Decode(&jsonResponse)
 	jsonResponse.ID = params["id"]
-	codes = append(codes, jsonResponse)
+	codes[0] = jsonResponse
 	json.NewEncoder(w).Encode(codes)
 }
 
