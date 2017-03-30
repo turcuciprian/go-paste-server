@@ -12,7 +12,7 @@ import (
 
 type codeData struct {
 	ID         string `json:"id,omitempty"`
-	SecretCode string `json:"SecretCode,omitempty"`
+	SecretCode string `json:"sc,omitempty"`
 }
 
 var codes []codeData
@@ -33,12 +33,12 @@ func getSLR(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(codes)
 
 }
-func addSLR(w http.ResponseWriter, req *http.Request) {
+func modSLR(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
-	var codeData codeData
-	_ = json.NewDecoder(req.Body).Decode(&codeData)
-	codeData.ID = params["id"]
-	codes = append(codes, codeData)
+	var jsonResponse codeData
+	_ = json.NewDecoder(req.Body).Decode(&jsonResponse)
+	jsonResponse.ID = params["id"]
+	codes = append(codes, jsonResponse)
 	json.NewEncoder(w).Encode(codes)
 }
 
@@ -65,7 +65,7 @@ func main() {
 	codes = append(codes, codeData{ID: "1", SecretCode: "Empty"})
 
 	router.HandleFunc("/slr", getSLR).Methods("GET")
-	router.HandleFunc("/slr/{id}", addSLR).Methods("POST")
+	router.HandleFunc("/slr", modSLR).Methods("POST")
 	router.HandleFunc("/slr/{id}", delSLR).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
